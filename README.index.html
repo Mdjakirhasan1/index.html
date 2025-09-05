@@ -1,0 +1,70 @@
+# index.html      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      font-family: Arial, sans-serif;
+      background-color: #f5f5f5;
+    }
+    h1 {
+      color: #ff4500;
+      margin-bottom: 20px;
+    }
+    #score, #timer {
+      font-size: 24px;
+      margin: 10px;
+    }
+    button {
+      font-size: 22px;
+      padding: 15px 30px;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+    }
+    button:active {
+      background-color: #0056b3;
+    }
+  </style>
+</head>
+<body>
+  <h1>🔥 Mini Tap Game 🔥</h1>
+  <div id="timer">Time: 10s</div>
+  <div id="score">Score: 0</div>
+  <button id="tapButton">Tap Me!</button>
+  <div id="result"></div>
+
+  <script>
+    let score = 0;
+    let time = 10;
+    let gameOver = false;
+
+    const scoreDisplay = document.getElementById('score');
+    const timerDisplay = document.getElementById('timer');
+    const resultDisplay = document.getElementById('result');
+    const tapButton = document.getElementById('tapButton');
+
+    // Timer
+    const countdown = setInterval(() => {
+      if(time > 0) {
+        time--;
+        timerDisplay.innerText = "Time: " + time + "s";
+      } else {
+        gameOver = true;
+        tapButton.disabled = true;
+        clearInterval(countdown);
+        resultDisplay.innerHTML = "<h2>Game Over! Your Score: " + score + "</h2>";
+      }
+    }, 1000);
+
+    // Tap function
+    tapButton.addEventListener('click', () => {
+      if(!gameOver) {
+        score++;
+        scoreDisplay.innerText = "Score: " + score;
+      }
+    });
+  </script>
+</body>
+</html>
